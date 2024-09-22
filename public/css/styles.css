@@ -4,3 +4,55 @@
 *:after {
   box-sizing: border-box;
 }
+
+body {
+  background-image: url(../images/site/checkerboard.jpg);
+  font-family: 'Times New Roman', Times, serif;
+}
+
+/********** navigation css **********/
+.navbar li {
+  color: white;
+  padding: 14px 20px;
+  text-align: center;
+}
+
+/* change navigation color on hover*/
+.navbar li:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+section {
+  background-image: url(../images/vehicles/delorean.jpg);
+}
+
+div {
+  color: dodgerblue;
+  opacity: 0.2;
+  width: 300px;
+  height: 500px;
+  align-self: flex-start;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: dodgerblue;
+  flex-direction: column;
+}
+
+.flex-container > div {
+  background-color: dodgerblue;
+  border: darkblue;
+  width: 100px;
+  margin: 10px;
+  line-height: 75px;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .flex-container {
+    flex-direction: row;
+  }
+}
