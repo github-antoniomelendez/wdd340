@@ -6,53 +6,116 @@
 }
 
 body {
-  background-image: url(../images/site/checkerboard.jpg);
   font-family: 'Times New Roman', Times, serif;
+  max-width: 100%;
 }
 
-/********** navigation css **********/
-.navbar li {
-  color: white;
-  padding: 14px 20px;
-  text-align: center;
+h1 {
+  background-color: whitesmoke;
+  border-bottom: 5px solid black;
 }
 
-/* change navigation color on hover*/
-.navbar li:hover {
-  background-color: #ddd;
+.siteName a{
+    text-decoration: none;
+    background-color: whitesmoke;
+    color: black;
+    font-size: 30px;
+    border-style: solid;
+}
+
+#tools a{
+  background-color: whitesmoke;
+  border-style: solid;
   color: black;
+  text-decoration: none;
+  font-size: 20px;
 }
 
-section {
-  background-image: url(../images/vehicles/delorean.jpg);
+nav {
+  background-color: black;
+  border-color: dodgerblue;
+  border-radius: 10px;
+  border-style: solid;
 }
 
-div {
-  color: dodgerblue;
-  opacity: 0.2;
-  width: 300px;
-  height: 500px;
-  align-self: flex-start;
-}
-
-.flex-container {
+nav ul{
   display: flex;
-  flex-wrap: wrap;
-  background-color: dodgerblue;
+  justify-content: space-evenly;
+  list-style-position: inside;
+  padding-left: 0;
+}
+
+nav li{
+  list-style: none;
+  font-size: 15px;
+  padding: 10px;
+}
+
+nav li a{
+  color: aliceblue;
+  text-decoration: none;
+  font-size: 25px;
+}
+
+.card1 {
+  border: 5px solid black;
+  max-width: fit-content;
+}
+
+.card2 {
+  background-color: whitesmoke;
+  border: 5px solid black;
+  padding-left: 20px;
+  max-width: 250px;
+}
+
+.card3 {
+  background-color: whitesmoke;
+  border: 5px solid black;
+  padding-left: 20px;
+  max-width: 400px;
+}
+
+.owntoday {
+  width: 175px;
+}
+
+.upgrades-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.upgrades-container p{
+  display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.flex-container > div {
-  background-color: dodgerblue;
-  border: darkblue;
-  width: 100px;
-  margin: 10px;
-  line-height: 75px;
-  text-align: center;
+.upgrades-container h2 {
+  grid-column: span 2;
+  background-color: whitesmoke;
+  border-bottom: 5px solid black;
 }
 
-@media (max-width: 600px) {
-  .flex-container {
-    flex-direction: row;
+footer {
+  background-color: whitesmoke;
+  border: 5px solid black;
+  justify-content: center;
+  max-width: 200px;
+  font-size: 20px;
+}
+
+@media (min-width: 1024px) {
+  .bg-checker {
+    background-image: url('/images/site/small_check.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: left;
+    width: 70em;
+    margin-inline: auto;
+    padding-block: 25px
   }
 }
