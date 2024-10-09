@@ -58,6 +58,28 @@ Util.buildClassificationGrid = async function(data){
     return grid
 }
 
+/* *************************************
+ * Build the vehicle inventory 
+ * *********************************** */
+Util.buildVehicleInventory = async function (data){
+    let grid
+    if (data.length > 0){
+        data.forEach((vehicle) => {
+            grid += `
+            <div>
+            <p> ${vehicle.inv_description} </p>
+            <img src= "${vehicle.inv_image}" alt= " image of ${vehicle.inv_make} ${vehicle.inv_model}">
+            </div>
+            <div>
+            <p> Price: $${ new Intl.NumberFormat('en-US').format(vehicle.inv_price)} </p>
+            <p> Miles: ${ new Intl.NumberFormat('en-US').format(vehicle.inv_miles)} </p>
+            </div>`
+
+        })
+    }
+    return grid
+}
+
 /* *****************************
  * Middleware For Handling Errors
  * Wrap other function in this for

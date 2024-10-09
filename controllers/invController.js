@@ -19,4 +19,28 @@ invCont.buildByClassificationId = async function (req, res, next) {
     })
 }
 
+/* ****************************
+ * Build vehicle inventory view
+ * **************************** */
+invCont.buildVehicleInventory = async function (req, res, next) {
+    const inv_id = req.params.inventoryId
+    const data = await invModel.getVehicleInventoryById(inv_id)
+    const make = data[0].inv_make
+    const model = data[0].inv_model
+    const year = data[0].inv_year
+    const grid = await utilities.buildVehicleInventory(data)
+    let nav = await utilities.getNav()
+    res.render("./inventory/vehicle", {
+        title: `${year} ${make} ${model} vehicle`,
+        nav,
+        grid,
+    })
+}
+
+invCont.getError = async function (req, res, next) {
+    const error = new Error('500 Error')
+    error.status = 500
+    next(error)
+}
+
 module.exports = invCont
