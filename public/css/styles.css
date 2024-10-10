@@ -133,6 +133,13 @@ footer {
   padding: 15px;
 }
 
+input:required:invalid, input:focus:invalid {
+  color: red;
+ }
+  input:required:valid {
+  color: dodgerblue;
+  }
+
 @media (min-width: 1024px) {
   .bg-checker {
     background-image: url('/images/site/small_check.jpg');

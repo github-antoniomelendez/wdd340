@@ -33,6 +33,7 @@ invCont.buildVehicleInventory = async function (req, res, next) {
     res.render("./inventory/vehicle", {
         title: `${year} ${make} ${model} vehicle`,
         nav,
+        errors: null,
         grid,
     })
 }
