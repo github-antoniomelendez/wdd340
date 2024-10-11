@@ -133,12 +133,125 @@ footer {
   padding: 15px;
 }
 
+.login {
+  background-color: whitesmoke;
+  border-radius: 10px;
+  border: 5px solid dodgerblue;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.emaillog {
+  background-color: white;
+  border-radius: 5px;
+  border: 2px solid dodgerblue;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+.passwordlog {
+  background-color: white;
+  border-radius: 5px;
+  border: 2px solid dodgerblue;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+.red-star {
+  color: red;
+}
+
+.reghere {
+  font-size: 20px;
+  text-decoration: none;
+  color: dodgerblue;
+}
+
+.reghere:hover {
+  border: 2px solid dodgerblue;
+  background-color: white;
+  font-size: 25px;
+  border-radius: 5px;
+  padding: 5px;
+  color: black;
+}
+
+.login-btn {
+  border: 2px solid dodgerblue;
+  background-color: white;
+  font-size: 20px;
+  border-radius: 5px;
+  padding: 5px;
+  margin-top: 20px;
+}
+
+.login-btn:hover {
+  font-size: 25px;
+  border: 2px solid dodgerblue;
+}
+
+.register-btn {
+  border: 2px solid dodgerblue;
+  background-color: white;
+  font-size: 20px;
+  border-radius: 5px;
+  padding: 5px;
+  margin-top: 20px;
+}
+
+.register-btn:hover {
+  font-size: 25px;
+  border: 2px solid dodgerblue;
+}
+
+.namePrice {
+  background-color: white;
+  border: 2px solid dodgerblue;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  margin: 10px;
+}
+
 input:required:invalid, input:focus:invalid {
   color: red;
  }
   input:required:valid {
-  color: dodgerblue;
+  color: green;
   }
+
+#inv-display {
+  background-color: whitesmoke;
+  border: 5px solid dodgerblue;
+  border-radius: 10px;
+  justify-content: center;
+}
+
+hr {
+  color: dodgerblue;
+}
+
+a {
+  color: dodgerblue;
+  text-decoration: none;
+}
+
+span {
+  font-size: 20px;
+}
+
+img {
+  border: 2px solid dodgerblue;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
 
 @media (min-width: 1024px) {
   .bg-checker {
