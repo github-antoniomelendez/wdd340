@@ -1,13 +1,14 @@
-<%# Content Heading %>
-
 <% if (title) { %>
-    <h1><%= title %></h1>
-    <% } else {
-        res.redirect('/')
-    } %>
-    
-    <%# A message block%>
-    <%# messages() %>
-    
-    <%# Inventory items display %>
-    <%- grid %>
+    <h1 class="management-title">
+        <%= title %>
+    </h1>
+    <% } else { res.redirect('/') } %>
+
+<!-- Display Flash msg -->
+<%- messages() %>
+
+<div class="management-container">
+    <br>
+    <a href="/inv/add-classification">Add New Classification</a><br><br>
+    <a href="/inv/add-inventory">Add New Vehicle</a><br><br>
+</div>

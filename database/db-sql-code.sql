@@ -251,3 +251,14 @@ inventory
 SET 
 inv_image = REPLACE(inv_image, '/images', '/images/vehicles'),
 inv_thumbnail = REPLACE(inv_thumbnail, '/images', '/images/vehicles');
+
+
+-- learning activity week 5 updating account
+UPDATE account
+SET account_type = 'Employee'
+WHERE account_id = 16
+
+UPDATE account
+SET account_type = 'Admin'
+WHERE account_id = 17
+

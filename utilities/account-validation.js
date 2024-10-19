@@ -1,9 +1,9 @@
 
 const utilities = require(".")
-  const { body, validationResult } = require("express-validator")
-  const validate = {}
-
-  const accountModel = require("../models/account-model")
+const { body, validationResult } = require("express-validator")
+const validate = {}
+const invModel = require("../models/inventory-model")
+const accountModel = require("../models/account-model")
 
 /*  **********************************
   *  Registration Data Validation Rules
@@ -35,7 +35,7 @@ validate.registationRules = () => {
       .custom(async (account_email) => {
       const emailExists = await accountModel.checkExistingEmail(account_email)
       if (emailExists){
-        throw new Error("Email exists. Please log in or use different email")
+        throw new Error("Email exists. Please log in or use a different email.")
       }
     }),
   
@@ -53,6 +53,56 @@ validate.registationRules = () => {
         .withMessage("Password does not meet requirements."),
     ]
   }
+
+
+/* ******************************
+* Classification name validation rules
+* ***************************** */
+validate.classificationRules = () => {
+  return [
+    body("classification_name")
+      .trim()
+      .escape()
+      .notEmpty()
+      .withMessage("Classification name is required.")
+      .bail() // stop on first error
+      .isLength({ min: 3 })
+      .withMessage("Classification name must be at least 3 characters.")
+      .bail()
+      .matches(/^[a-zA-Z0-9]+$/)
+      .withMessage(
+        "Classification name is required and must be without spaces or special characters."
+      )
+      .custom(async (classification_name) => {
+        // Check if the classification already exists
+        const existingClassification = await invModel.findClassificationByName(
+          classification_name
+        );
+        if (existingClassification) {
+          throw new Error(
+            "Classification name already exists. Please enter a unique name."
+          );
+        }
+      }),
+  ];
+};
+ 
+validate.checkClassData = async (req, res, next) => {
+  const { classification_name } = req.body
+  let errors = []
+  errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav()
+    res.render("inventory/add-classification", {
+      errors,
+      title: "Add Classification",
+      nav,
+      classification_name,
+    })
+    return
+  }
+  next()
+}
 
 /* ******************************
  * Check data and return errors or continue to registration
@@ -89,8 +139,8 @@ validate.loginRules = () => {
     .withMessage("A valid email is required.")
     .custom(async (account_email) => {
     const emailExists = await accountModel.checkExistingEmail(account_email)
-    if (emailExists){
-      throw new Error("Email exists. Please log in or use different email")
+    if (!emailExists){
+      throw new Error("Email does not match. Please log in, register or use different email")
     }
   }),
 

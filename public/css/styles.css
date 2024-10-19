@@ -68,6 +68,11 @@ nav li a{
   font-size: 25px;
 }
 
+main {
+  background-color: whitesmoke;
+  text-align: center;
+}
+
 .card1 {
   border-top: 5px solid dodgerblue;
   border-left: 5px solid dodgerblue;
@@ -178,7 +183,7 @@ footer {
   color: black;
 }
 
-.login-btn {
+.login-btn, .inventory-btn, .addClassification-btn {
   border: 2px solid dodgerblue;
   background-color: white;
   font-size: 20px;
@@ -187,7 +192,7 @@ footer {
   margin-top: 20px;
 }
 
-.login-btn:hover {
+.login-btn:hover, .inventory-btn:hover, .addClassification-btn:hover {
   font-size: 25px;
   border: 2px solid dodgerblue;
 }
@@ -239,6 +244,42 @@ a {
 }
 
 span {
+  font-size: 20px;
+}
+
+p {
+  border: 5px solid dodgerblue;
+  background-color: whitesmoke;
+  padding: 5px;
+  text-align: center;
+}
+
+.management-container {
+  background-color: whitesmoke;
+  font-size: 20px;
+  color: dodgerblue;
+  border-radius: 10px;
+  border: 2px solid dodgerblue;
+  margin: 5px;
+}
+
+.inventory-form {
+  background-color: whitesmoke;
+  border: 5px solid dodgerblue;
+  margin: 10px;
+}
+
+.input-wrapper {
+  background-color: white;
+  border-radius: 5px;
+  border-bottom: 1px solid dodgerblue;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 5px;
+}
+
+legend {
+  color: dodgerblue;
   font-size: 20px;
 }
 

@@ -9,7 +9,11 @@ const regValidate = require('../utilities/account-validation')
 router.get("/login", utilities.handleErrors(accountController.buildLogin));
 //route for registration
 router.get("/register", utilities.handleErrors(accountController.buildRegister));
-// Process the registration data
+
+// Route to handle account management
+router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildAccountManagement));
+
+//process the register attempt
 router.post(
     "/register",
     regValidate.registationRules(),
@@ -22,7 +26,13 @@ router.post(
   "/login",
   regValidate.loginRules(),
   regValidate.checkLogData,
-  utilities.handleErrors(accountController.registerAccount)
+  utilities.handleErrors(accountController.accountLogin)
 )
+
+//process the account management
+router.post(
+  "/accountManagement",
+  utilities.handleErrors(accountController.accountLogin)
+);
 
 module.exports = router

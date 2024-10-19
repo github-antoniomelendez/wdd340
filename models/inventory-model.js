@@ -26,6 +26,35 @@ async function getInventoryByClassificationId(classification_id) {
 }
 
 /* *********************************
+ * New Classification Function 
+ * ******************************** */
+async function newClassification(classification_name) {
+    try {
+      const sql = "INSERT INTO classification (classification_name) VALUES ($1) RETURNING *";
+      const result = await pool.query(sql, [classification_name]);
+      return result.rowCount > 0; // True if insertion was successful
+    } catch (error) {
+      console.error("Database error:", error);
+      throw error; // Propagate error to the controller
+    }
+  }
+
+/* ***************************
+ *  Classification by classification_name validation procedure
+ * ************************** */
+async function findClassificationByName(classification_name) {
+  try {
+    const sql =
+      "SELECT * FROM classification WHERE LOWER(classification_name) = LOWER($1)";
+    const result = await pool.query(sql, [classification_name]);
+    return result.rowCount > 0; // Returns true if a matching classification is found
+  } catch (error) {
+    console.error("findClassificationByName error:", error);
+    throw error;
+  }
+}
+
+/* *********************************
  * get inventory vehicle by inventory id 
  * ******************************** */
 async function getVehicleInventoryById(inv_id) {
@@ -43,4 +72,36 @@ async function getVehicleInventoryById(inv_id) {
     }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getVehicleInventoryById};
+async function newInventory(
+  inv_make,
+  inv_model,
+  inv_year,
+  inv_description,
+  inv_image,
+  inv_thumbnail,
+  inv_price,
+  inv_miles,
+  inv_color,
+  classification_id
+) {
+  try {
+    const sql =
+      "INSERT INTO inventory (inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *";
+    return await pool.query(sql, [
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color,
+      classification_id,
+    ]);
+  } catch (error) {
+    return error.message;
+  }
+}
+
+module.exports = {getClassifications, getInventoryByClassificationId, newInventory, getVehicleInventoryById,findClassificationByName, newClassification};

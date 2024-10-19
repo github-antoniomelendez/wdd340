@@ -1,0 +1,17 @@
+<% if (title) { %>
+    <h1 class="management-title">
+        <%= title %>
+    </h1>
+    <% } else { res.redirect('/') } %>
+
+<!-- Display Flash msg -->
+<%- messages() %>
+
+<!-- Form -->
+<form id="loginForm"  class="login" action="/inv/add-classification" method="post">
+    <label for="classification_name">New Classification Name:<span class="red-star">*</span></label><br>
+    <input type="text" class="emaillog" name="classification_name" id="classification_name" required><br>
+
+    <p>Note: The classification name cannot contain spaces or special characters.</p>
+    <button type="submit" class="addClassification-btn">Add Classification</button>
+</form>
