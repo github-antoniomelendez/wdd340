@@ -87,6 +87,9 @@ validate.classificationRules = () => {
   ];
 };
  
+/* ******************************
+ * Check inventory data
+ * ***************************** */
 validate.checkClassData = async (req, res, next) => {
   const { classification_name } = req.body
   let errors = []
@@ -98,6 +101,28 @@ validate.checkClassData = async (req, res, next) => {
       title: "Add Classification",
       nav,
       classification_name,
+    })
+    return
+  }
+  next()
+}
+
+/* ******************************
+ * Check update data, errors will be 
+ * re-directed back to the edit view
+ * ***************************** */
+validate.checkUpdateData = async (req, res, next) => {
+  const { classification_name, inv_id } = req.body
+  let errors = []
+  errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav()
+    res.render("inventory/edit-inventory", {
+      errors,
+      title: "Edit Inventory",
+      nav,
+      classification_name,
+      inv_id,
     })
     return
   }

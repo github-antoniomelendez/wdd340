@@ -5,6 +5,19 @@ const invController = require("../controllers/invController")
 const utilities = require("../utilities/index")
 const regValidate = require("../utilities/account-validation");
 
+// Route to build the edit or modify vehicle view
+router.get("/edit/:inv_id", utilities.handleErrors(invController.editInventoryView));
+
+//Route to get the inventory by classification id
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+
+// Route for updating the inventory
+router.post(
+  "/update/",
+  //regValidate.classificationRules(),
+  //regValidate.checkUpdateData,
+  utilities.handleErrors(invController.updateInventory))
+
 //Route to build inventory by classification view
 router.get("/type/:classificationId", utilities.handleErrors(invController.buildByClassificationId));
 
@@ -35,6 +48,23 @@ router.post(
     //regValidate.checkClassData,
     utilities.handleErrors(invController.addinventory)
   )
+
+router.post(
+    "/edit-inventory",
+    //regValidate.vehicleRules(),
+    //regValidate.checkUpdateData,
+    utilities.handleErrors(invController.updateInventory)
+  );
+
+//Route to build the delete vehicle view
+router.get("/delete/:inv_id", utilities.handleErrors(invController.deleteInventoryView));
+
+router.post(
+  "/delete/",
+  //regValidate.vehicleRules(),
+  //regValidate.checkUpdateData,
+  utilities.handleErrors(invController.deleteInventory)
+)
 
 //Route for 500 error
 router.get("/trigger-error", utilities.handleErrors(invController.getError));
