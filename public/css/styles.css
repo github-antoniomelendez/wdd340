@@ -272,7 +272,9 @@ p {
 .input-wrapper {
   background-color: white;
   border-radius: 5px;
-  border-bottom: 1px solid dodgerblue;
+  border-bottom: 2px solid dodgerblue;
+  border-right: 1px solid dodgerblue;
+  border-left: 1px solid dodgerblue;
   margin-top: 5px;
   margin-bottom: 5px;
   padding: 5px;
