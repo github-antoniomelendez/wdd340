@@ -1,0 +1,55 @@
+<div class="form-container">
+    <!-- Title Heading -->
+    <% if (title) { %>
+        <h1 class="delete-review">
+            <%= title %>
+        </h1>
+        <% } else { res.redirect('/') } %>
+   
+            <!-- Display Flash msg -->
+            <%- messages() %>
+   
+                <% if (errors) { %>
+                    <ul class="notice">
+                        <% errors.array().forEach(error=> { %>
+                            <li>
+                                <%= error.msg %>
+                            </li>
+                            <% }) %>
+                    </ul>
+                    <% } %>
+   
+    <form id="reviewForm" class="review-form"
+        action="/inv/delete-review" method="POST">
+        <fieldset class="field">
+            <legend>Delete Review Form</legend>
+   
+            <div class="input-wrapper testDesc">
+                <label for="screen_name">Screen Name*</label>
+                <textarea id="screen_name"
+                    placeholder="Enter Screen Name, use at least 20 characters"
+                    title="Screen Name must be at least 20 characters"
+                    name="screen_name" rows="5" cols="33" minlength="20"
+                    required><%- locals.inv_description %></textarea>
+            </div>
+    
+            <div class="input-wrapper testDesc">
+                <label for="review_text">Review Text*</label>
+                <textarea id="review_text"
+                    placeholder="Enter review, use at least 20 characters"
+                    title="Review must be at least 20 characters"
+                    name="review_text" rows="5" cols="33" minlength="20"
+                    required><%- locals.review_text %></textarea>
+            </div>
+   
+        <input type="submit" id="submitBtn" value="Delete Review" class="inventory-btn">
+   
+        <input type="hidden" name="inv_id"
+        <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+        <% } %>> 
+
+        <p>Confirm Deletion - The delete is permanent.</p>
+
+    </fieldset>
+    </form>
+</div>

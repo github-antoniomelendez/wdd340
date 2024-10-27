@@ -343,4 +343,138 @@ invCont.deleteInventory = async function (req, res, next) {
       }
     };
 
+/* ****************************
+ * build the view for a review
+ * **************************** */
+invCont.buildReview = async function (req, res, next) {
+    let nav = await utilities.getNav()
+    res.render("./inventory/add-review", {
+        title: " Add Review",
+        nav,
+        errors: null,
+    })
+}
+
+/* ***************************
+ *  Build edit review view
+ * ************************** */
+invCont.editReviewView = async function (req, res, next) {
+    const inv_id = parseInt(req.params.inv_id);
+    let nav = await utilities.getNav();
+    const itemDataArray = await invModel.getReviewById(inv_id)
+    const itemData = itemDataArray[0]; // Access the first element of the array instead of adding on res.render
+    
+    if (!itemData) {
+      req.flash("error", "Item not found");
+      return res.redirect("/inv");
+    }
+   
+    const itemName = `${itemData.inv_id} ${itemData.review_date}`;
+    res.render("./inventory/edit-review", {
+      title: "Edit " + itemName,
+      nav,
+      errors: null,
+      review_id: itemData.review_id,
+      review_date: itemData.review_date,
+      review_text: itemData.review_text,
+      inv_id: itemData.inv_id,
+      account_id: itemData.account_id,
+    });
+  };
+
+/* ****************************
+ * Edit Review data
+ * **************************** */
+invCont.editReview = async function (req, res, next) {
+    let nav = await utilities.getNav();
+    const { 
+        review_id,
+        review_date,
+        review_text,
+        inv_id,
+        account_id
+    } = req.body; 
+    const updateResult = await invModel.editReview(
+        review_id,
+        review_date,
+        review_text,
+        inv_id,
+        account_id
+    )
+    if (updateResult) {
+        const itemName = updateResult.inv_id + " " + updateResult.review_date
+        req.flash("notice", `The ${itemName} was successfully updated.`)
+        res.redirect("/inv/")
+      } else {
+        const itemName = `${inv_id} ${review_date}`
+        req.flash("notice", "Sorry, the insert failed.")
+        res.status(501).render("inventory/edit-inventory", {
+        title: "Edit " + itemName,
+        nav,
+        errors: null,
+        review_id,
+        review_date,
+        review_text,
+        inv_id,
+        account_id
+        })
+        console.log(`inv_id, ${inv_id}`)
+      }
+    }
+
+/* ***************************
+ *  Build delete review view
+ * ************************** */
+invCont.deleteReviewView = async function (req, res, next) {
+    const inv_id = parseInt(req.params.inv_id);
+    let nav = await utilities.getNav();
+    const itemDataArray = await invModel.getReviewById(inv_id)
+    const itemData = itemDataArray[0]; // Access the first element of the array instead of adding on res.render
+    if (!itemData) {
+      req.flash("error", "Item not found");
+      return res.redirect("/inv");
+    }
+   
+    const itemName = `${itemData.inv_id} ${itemData.review_date}`;
+    res.render("./inventory/delete-review", {
+      title: "Delete " + itemName,
+      nav,
+      errors: null,
+      review_id: itemData.review_id,
+      review_date: itemData.review_date,
+      review_text: itemData.review_text,
+      inv_id: itemData.inv_id,
+      account_id: itemData.account_id,
+    });
+  };
+
+/* ****************************
+ * Delete review data
+ * **************************** */
+invCont.deleteReview = async function (req, res, next) {
+    let nav = await utilities.getNav();
+    const { 
+        review_id,
+        review_date,
+        review_text,
+        inv_id,
+        account_id,
+    } = req.body; 
+    const deleteResult = await invModel.deleteReview(
+        review_id,
+        review_date,
+        review_text,
+        inv_id,
+        account_id,
+    )
+    if (deleteResult) {
+        const itemName = deleteResult.inv_id + " " + deleteResult.review_date
+        req.flash("notice", `The ${itemName} was successfully deleted.`);
+        res.redirect("/inv/")
+      } else {
+        req.flash("notice", "Sorry, the insert failed.");
+        res.status(501).render("inventory/delete/inv_id")
+      }
+    };
+
 module.exports = invCont
